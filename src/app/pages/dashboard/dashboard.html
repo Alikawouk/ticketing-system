@@ -1,1 +1,88 @@
-<p>dashboard works!</p>
+<div class="container-fluid">
+  <!-- Topbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <a class="navbar-brand ms-3" href="#">Ticket Dashboard</a>
+    <div class="ms-auto me-3 text-white"><i class="bi bi-person-circle me-2"></i>Admin</div>
+  </nav>
+
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2 bg-light vh-100 p-3">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link active" href="#">🏠 Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">🎫 Tickets</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">📊 Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">⚙️ Settings</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <h3 class="mb-4">Welcome back, Admin 👋</h3>
+
+      <!-- Summary Cards -->
+      <div class="row text-center mb-4">
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm border-0 bg-primary text-white">
+            <div class="card-body">
+              <h5>Open Tickets</h5>
+              <h2>24</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm border-0 bg-warning text-white">
+            <div class="card-body">
+              <h5>Assigned Tickets</h5>
+              <h2>12</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm border-0 bg-success text-white">
+            <div class="card-body">
+              <h5>Resolved Tickets</h5>
+              <h2>48</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Tickets Table -->
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white">Recent Tickets</div>
+        <div class="card-body">
+          <table class="table table-striped align-middle">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of tickets">
+                <td>{{ t.id }}</td>
+                <td>{{ t.title }}</td>
+                <td>{{ t.department }}</td>
+                <td>
+                  <span [class]="'badge rounded-pill bg-' + getStatusColor(t.status)">
+                    {{ t.status }}
+                  </span>
+                </td>
+                <td>{{ t.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="mt-4 text-center">
+        <button class="btn btn-success px-4">+ Create Ticket</button>
+      </div>
+    </div>
+  </div>
+</div>
