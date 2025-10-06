@@ -1,0 +1,76 @@
+<div class="row mt-4">
+  <!-- categro list List -->
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">Parent Category</div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Sr No</th>
+              <th>Category Name</th>
+              <th>Department Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of gridData(); track $index) {
+            <tr>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ item.categoryName }}</td>
+              <td>{{ item.deptName }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary me-2" (click)="onEdit(item)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="onDelete(item.categoryId)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            }
+
+            <!-- Repeat rows dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Department Form -->
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success text-white">New Category</div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="catName" class="form-label">Category Name</label>
+            <input
+              type="text"
+              id="catName"
+              class="form-control"
+              name="catName"
+              [(ngModel)]="newObj.categoryName"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="deptId" class="form-label">Department</label>
+            <select id="deptId" name="deptId" class="form-select" [(ngModel)]="newObj.deptId">
+              <option value="">Select Dept</option>
+              @for (item of DepData(); track $index) {
+              <option [value]="item.deptId">{{ item.deptName }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            @if(this.newObj.categoryId==0){
+            <button type="submit" class="btn btn-success" (click)="save()">Save Dept</button>
+            }@else{
+            <button type="submit" class="btn btn-warning" (click)="update()">Update Dept</button>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

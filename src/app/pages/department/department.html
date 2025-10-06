@@ -1,0 +1,79 @@
+<div class="row mt-4">
+  <!-- Department List -->
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">Department List</div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Sr No</th>
+              <th>Department Name</th>
+              <th>Created Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of departmentList(); track $index) {
+            <tr>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ item.deptName }}</td>
+              <td>{{ item.createdDate | date : 'dd-MMMM-yyyy' }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary me-2" (click)="onEdit(item)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="onDelete(item.deptId)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            }
+
+            <!-- Repeat rows dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Department Form -->
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success text-white">New Department</div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="deptName" class="form-label">Department Name</label>
+            <input
+              type="text"
+              id="deptName"
+              class="form-control"
+              name="deptName"
+              [(ngModel)]="newDeptObj.deptName"
+            />
+          </div>
+          @if(this.newDeptObj.deptId==0){
+          <div class="mb-3">
+            <label for="creationDate" class="form-label">Date of Creation</label>
+            <input
+              type="date"
+              id="creationDate"
+              class="form-control"
+              name="createdDate"
+              [(ngModel)]="newDeptObj.createdDate"
+            />
+          </div>
+          }
+
+          <div class="d-flex justify-content-between">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            @if(this.newDeptObj.deptId==0){
+            <button type="submit" class="btn btn-success" (click)="saveDept()">Save Dept</button>
+            }@else{
+            <button type="submit" class="btn btn-warning" (click)="updatDept()">Update Dept</button>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+.btn-group .btn {
+  min-width: 140px; /* make both buttons same size */
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
